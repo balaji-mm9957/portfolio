@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Balaji Murugan — Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0e0f0e;
+    --bg2: #161714;
+    --bg3: #1d1e1b;
+    --line: rgba(255,255,255,0.08);
+    --line2: rgba(255,255,255,0.14);
+    --accent: #b8f0a0;
+    --accent2: #7ee05a;
+    --text: #e8e6df;
+    --muted: #8a8880;
+    --tag-bg: rgba(184,240,160,0.1);
+    --tag-border: rgba(184,240,160,0.25);
+    --card-bg: #161714;
+    --card-border: rgba(255,255,255,0.07);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(14,15,14,0.85);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2.5rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0e0f0e;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-outline {
+    border: 1px solid var(--line2);
+    color: var(--muted);
+    background: transparent;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTION */
+  section {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+  }
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 2.5rem;
+  }
+  .skill-cell {
+    background: var(--bg2);
+    padding: 1.5rem;
+  }
+  .skill-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tag {
+    font-size: 12px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+  .tag.gray {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--line2);
+    color: var(--muted);
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 1px; margin-top: 2.5rem; background: var(--line); border: 1px solid var(--line); }
+  .project-card {
+    background: var(--card-bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    transition: background 0.2s;
+  }
+  .project-card:hover { background: var(--bg3); }
+  .project-image {
+    aspect-ratio: 16/10;
+    background: var(--bg3);
+    border-right: 1px solid var(--line);
+    overflow: hidden;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 100%; height: 100%;
+    padding: 2rem;
+  }
+  .img-placeholder-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--line2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .img-placeholder-icon svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; }
+  .project-info { padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin: 0.75rem 0 1.25rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  /* EXPERIENCE */
+  .exp-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .exp-item:first-child { border-top: 1px solid var(--line); }
+  .exp-meta { }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+  }
+  .exp-org {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .exp-body h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+  .exp-bullets { margin: 0.75rem 0 0; padding-left: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .exp-bullets li { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+  .exp-bullets li::marker { color: var(--accent); }
+
+  /* PUBLICATION */
+  .pub-card {
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    padding: 2rem 2.5rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .pub-card::before {
+    content: '\201C';
+    font-family: 'Fraunces', serif;
+    font-size: 120px;
+    color: var(--accent);
+    opacity: 0.12;
+    position: absolute;
+    top: -1rem; left: 1.5rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .pub-title { font-size: 0.95rem; color: var(--text); line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+  .pub-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 2.5rem;
+  }
+  .contact-cell {
+    background: var(--bg2);
+    padding: 1.75rem 2rem;
+  }
+  .contact-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .contact-cell a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.2s;
+  }
+  .contact-cell a:hover { opacity: 0.7; }
+  .contact-cell p { font-size: 14px; color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--line);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.7s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero > *:nth-child(4) { animation-delay: 0.4s; }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 1.25rem; }
+    .hero { padding: 5rem 1.25rem 3rem; }
+    section { padding: 3rem 1.25rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-image { border-right: none; border-bottom: 1px solid var(--line); }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">BM — ENG</a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-tag">Mechatronics &amp; Automation Engineer — Sydney, AU</p>
+  <h1>Balaji<br/><em>Murugan</em></h1>
+  <p class="hero-sub">
+    MEng graduate from UNSW specialising in robotic system design, sensor integration, and hardware-software automation. Published researcher. Hands-on builder.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2>Skills &amp; Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <p class="skill-cell-label">Software</p>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">MATLAB</span>
+        <span class="tag">Git</span>
+        <span class="tag gray">Simulink</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-cell-label">CAD &amp; Design</p>
+      <div class="skill-tags">
+        <span class="tag">SolidWorks</span>
+        <span class="tag">Fusion 360</span>
+        <span class="tag gray">Inventor</span>
+        <span class="tag gray">Unreal Engine</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-cell-label">Hardware</p>
+      <div class="skill-tags">
+        <span class="tag">Sensor integration</span>
+        <span class="tag">Actuator systems</span>
+        <span class="tag gray">3D printing (FDM)</span>
+        <span class="tag gray">Soldering</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <p class="skill-cell-label">Control &amp; Systems</p>
+      <div class="skill-tags">
+        <span class="tag">IO integration</span>
+        <span class="tag">Control loop tuning</span>
+        <span class="tag gray">Modbus / I2C / SPI</span>
+        <span class="tag gray">Data acquisition</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Work</p>
+  <h2>Projects</h2>
+
+  <div class="projects-list">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-image">
+        <!-- REPLACE: swap the div below with <img src="your-image.jpg" alt="Robotic finger"/> -->
+        <div class="img-placeholder">
+          <div class="img-placeholder-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          Add image — robotic finger
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">01 — Masters Thesis</p>
+        <h3>Anthropometric Tendon-Driven Robotic Finger</h3>
+        <p class="project-desc">
+          Designed, fabricated, and validated a magnetic actuated artificial finger with tendon-driven joints. Full hardware integration: flex sensor wiring, signal routing, and sensor-to-DAQ validation. MATLAB used for control loop analysis and kinematic benchmarking against human finger movements.
+        </p>
+        <div class="project-tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Flex sensors</span>
+          <span class="tag gray">3D printing</span>
+          <span class="tag gray">Published</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-image">
+        <!-- REPLACE: swap the div below with <img src="your-image.jpg" alt="Gesture controlled arm"/> -->
+        <div class="img-placeholder">
+          <div class="img-placeholder-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          Add image — robotic arm
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">02 — Bachelor's Thesis</p>
+        <h3>Gesture-Controlled Robotic Arm</h3>
+        <p class="project-desc">
+          Designed a 3D-modelled robotic arm in Fusion 360 and Inventor. Integrated electromechanical sensors and servo actuators for real-time gesture capture and closed-loop motion control. Full hardware integration including wiring, connector routing, and signal validation.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Fusion 360</span>
+          <span class="tag">Electromechanical sensors</span>
+          <span class="tag gray">Closed-loop control</span>
+          <span class="tag gray">Simulink</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-image">
+        <!-- REPLACE: swap the div below with <img src="your-image.jpg" alt="AR hardware setup"/> -->
+        <div class="img-placeholder">
+          <div class="img-placeholder-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          Add image — AR setup
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">03 — Lab Project</p>
+        <h3>AR System Hardware Enclosures</h3>
+        <p class="project-desc">
+          Designed and commissioned hardware enclosures for an augmented reality installation using SolidWorks and FDM 3D printing. Managed IO routing and sensor mount integration for a live interactive deployment.
+        </p>
+        <div class="project-tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">FDM printing</span>
+          <span class="tag gray">IO integration</span>
+          <span class="tag gray">Commissioning</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <div class="project-image">
+        <!-- REPLACE: swap the div below with <img src="your-image.jpg" alt="Python pipeline"/> -->
+        <div class="img-placeholder">
+          <div class="img-placeholder-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          Add image — pipeline / terminal
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">04 — Lab Automation</p>
+        <h3>Automated Python Data Pipeline</h3>
+        <p class="project-desc">
+          Built an end-to-end automated pipeline for real-time data acquisition, processing, and structured storage — bridging hardware data sources with a software control layer. Leveraged AI-assisted development tools to accelerate iteration and debugging.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Data acquisition</span>
+          <span class="tag gray">Automation</span>
+          <span class="tag gray">AI-assisted dev</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<section id="publication">
+  <p class="section-label">Research</p>
+  <h2>Publication</h2>
+  <div class="pub-card">
+    <p class="pub-title">
+      Design and development of a novel anthropometric tendon-driven magnetic actuated artificial finger to improve the sensitivity feedback
+    </p>
+    <p class="pub-meta">Balaji Murugan &nbsp;·&nbsp; UNSW Sydney &nbsp;·&nbsp; MEng Thesis &nbsp;·&nbsp; 2024–25</p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Background</p>
+  <h2>Experience</h2>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2024 – 2025</p>
+        <p class="exp-org">UNSW Sydney</p>
+      </div>
+      <div class="exp-body">
+        <h3>Lab Technical Assistant</h3>
+        <ul class="exp-bullets">
+          <li>Configured, debugged, and enhanced interactive AV &amp; GUI systems in the City Analytics Lab</li>
+          <li>Built an automated Python pipeline for real-time data acquisition and structured storage</li>
+          <li>Designed and commissioned hardware enclosures for AR systems (SolidWorks + FDM)</li>
+          <li>Diagnosed hardware and software faults in live lab environments; implemented iterative system improvements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2023 – 2024</p>
+        <p class="exp-org">UNSW Sydney</p>
+      </div>
+      <div class="exp-body">
+        <h3>Casual Academic — Mechanical Engineering</h3>
+        <ul class="exp-bullets">
+          <li>Delivered tutorials and lab demonstrations for undergraduate engineering students</li>
+          <li>Supervised in-class experiments and provided technical assessment feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">2021 – 2022</p>
+        <p class="exp-org">Isuzu Motors</p>
+      </div>
+      <div class="exp-body">
+        <h3>Executive Trainee</h3>
+        <ul class="exp-bullets">
+          <li>Coordinated vendor data management and consolidated production reports across supply chain</li>
+          <li>Collaborated with process engineers and mechanical teams on the production floor</li>
+          <li>Gained exposure to industrial plant communication networks and data protocols</li>
+          <li>Conducted on-site supplier assessments to improve output and avoid production delays</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's Talk</p>
+  <h2>Get in Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-cell">
+      <p class="contact-cell-label">Email</p>
+      <!-- UPDATE: replace with your personal email -->
+      <a href="mailto:b.murugan@unsw.edu.au">b.murugan@unsw.edu.au</a>
+    </div>
+    <div class="contact-cell">
+      <p class="contact-cell-label">LinkedIn</p>
+      <a href="https://linkedin.com/in/bm7599" target="_blank">linkedin.com/in/bm7599</a>
+    </div>
+    <div class="contact-cell">
+      <p class="contact-cell-label">Location</p>
+      <p>Sydney, NSW — Open to hybrid &amp; on-site</p>
+    </div>
+    <div class="contact-cell">
+      <p class="contact-cell-label">Availability</p>
+      <p>Open to full-time roles immediately</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Balaji Murugan &nbsp;·&nbsp; Mechatronics &amp; Automation Engineer &nbsp;·&nbsp; Sydney AU &nbsp;·&nbsp; 2025
+</footer>
+
+</body>
+</html>
